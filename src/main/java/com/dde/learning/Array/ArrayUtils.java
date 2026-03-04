@@ -1,7 +1,8 @@
-package com.dde.learning.数组;
+package com.dde.learning.Array;
 
 
 /**
+ * @author DDE
  * 数组工具类
  */
 public final class ArrayUtils {
@@ -61,6 +62,23 @@ public final class ArrayUtils {
         }
 
         return (double) totalValue / data.length;
+    }
+
+    /**
+     * 数组翻转
+     * @param data 数据
+     * @return 结果
+     */
+    public static <T> void arrayReversal(T[] data) {
+        int left = 0;
+        int right = data.length - 1;
+        while (left < right) {
+            T temp = data[left];
+            data[left] = data[right];
+            data[right] = temp;
+            left++;
+            right--;
+        }
     }
 
     /**

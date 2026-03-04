@@ -1,8 +1,9 @@
 package com.dde.learning;
 
-import com.dde.learning.数组.ArrayUtils;
+import com.dde.learning.Array.ArrayUtils;
 
 import java.util.Arrays;
+
 public class TestArrayUtils {
 
     public static void main(String[] args) {
@@ -20,5 +21,10 @@ public class TestArrayUtils {
         // 3️⃣ 测试平均值
         double avg = ArrayUtils.getAverageValue(data);
         System.out.printf("平均值: %.2f%n", avg);
+
+
+        Integer[] data1 = {1, 2, 3, 4, 5};
+        ArrayUtils.arrayReversal(data1);
+        System.out.println("翻转数组：" + Arrays.toString(data1));
     }
 }
