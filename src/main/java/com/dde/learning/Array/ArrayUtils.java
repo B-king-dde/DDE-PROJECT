@@ -66,6 +66,7 @@ public final class ArrayUtils {
 
     /**
      * 数组翻转
+     *
      * @param data 数据
      * @return 结果
      */
@@ -80,6 +81,59 @@ public final class ArrayUtils {
             right--;
         }
     }
+
+    /**
+     * 冒泡排序
+     *
+     * @param data 数组
+     */
+    public static void bubbleSort(int[] data) {
+        for (int i = 0; i < data.length - 1; i++) {
+            boolean swapped = false;
+            for (int j = 0; j < data.length - 1 - i; j++) {
+                if (data[j] > data[j + 1]) {
+                    int temp = data[j];
+                    data[j] = data[j + 1];
+                    data[j + 1] = temp;
+                    swapped = true;
+                }
+            }
+            if (!swapped) {
+                break;
+            }
+        }
+    }
+
+    /**
+     * 二分查找
+     *
+     * @param data   数组
+     * @param target 目标数
+     * @return 目标数在数组中的下标
+     */
+    public static int binarySearch(int[] data, int target) {
+
+        int left = 0;
+        int right = data.length - 1;
+
+        while (left <= right) {
+
+            int mid = left + (right - left) / 2;
+
+            if (data[mid] == target) {
+                return mid;
+            }
+
+            if (target > data[mid]) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        return -1;
+    }
+
 
     /**
      * 数组统一校验
