@@ -1,6 +1,8 @@
 package com.dde.learning.Array;
 
 
+import java.util.Arrays;
+
 /**
  * @author DDE
  * 数组工具类
@@ -68,7 +70,6 @@ public final class ArrayUtils {
      * 数组翻转
      *
      * @param data 数据
-     * @return 结果
      */
     public static <T> void arrayReversal(T[] data) {
         int left = 0;
@@ -134,6 +135,116 @@ public final class ArrayUtils {
         return -1;
     }
 
+    /**
+     * 获取二维数组的和
+     *
+     * @param data 数据
+     * @return 结果
+     */
+    public static int sumOfTwoDimensionalArrays(int[][] data) {
+        int sum = 0;
+        for (int[] datum : data) {
+            for (int j = 0; j < datum.length; j++) {
+                sum += datum[j];
+            }
+
+        }
+        return sum;
+    }
+
+    /**
+     * 在升序数组中插入一个数
+     *
+     * @param data  数组（必须已按升序排列）
+     * @param value 要插入的数
+     * @return 插入新元素后的升序数组
+     */
+    public static int[] insertInToSortedArray(int[] data, int value) {
+        validateArray(data);
+
+        int[] newData = Arrays.copyOf(data, data.length + 1);
+
+        // 找到第一个大于 value 的位置
+        int insertIndex = 0;
+        for (int i = 0; i < data.length; i++) {
+            if (data[i] > value) {
+                insertIndex = i;
+                break;
+            }
+            // 如果 value 大于等于所有元素，插到最后
+            if (i == data.length - 1) {
+                insertIndex = data.length;
+            }
+        }
+
+        // 复制 insertIndex 之前的元素
+        for (int i = 0; i < insertIndex; i++) {
+            newData[i] = data[i];
+        }
+
+        // 插入新元素
+        newData[insertIndex] = value;
+
+        // 复制 insertIndex 之后的元素
+        for (int i = insertIndex; i < data.length; i++) {
+            newData[i + 1] = data[i];
+        }
+
+        return newData;
+    }
+
+    public static void forTest(int target) {
+        // 随机生成 int 数组
+        int[] data = new int[10];
+        for (int i = 0; i < data.length; i++) {
+            data[i] = (int) (Math.random() * 10);
+        }
+        
+        // 降序排序（从大到小）
+        for (int i = 0; i < data.length - 1; i++) {
+            boolean swapped = false;
+            for (int j = 0; j < data.length - 1 - i; j++) {
+                if (data[j] < data[j + 1]) {
+                    int temp = data[j];
+                    data[j] = data[j + 1];
+                    data[j + 1] = temp;
+                    swapped = true;
+                }
+            }
+            if (!swapped) {
+                break;
+            }
+        }
+        System.out.println("降序后数组：" + Arrays.toString(data));
+        
+        // 二分查找（降序数组）
+        int left = 0;
+        int right = data.length - 1;
+        boolean found = false;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            
+            if (data[mid] == target) {
+                System.out.println("存在目标数：" + target + "，下标：" + mid);
+                found = true;
+                break;
+            }
+            
+            // 降序数组：左边大，右边小
+            if (target > data[mid]) {
+                // 目标数更大，往左边找（左边是大数区域）
+                right = mid - 1;
+            } else {
+                // 目标数更小，往右边找（右边是小数区域）
+                left = mid + 1;
+            }
+        }
+        
+        if (!found) {
+            System.out.println("未找到目标数：" + target);
+        }
+    }
 
     /**
      * 数组统一校验
